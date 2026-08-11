@@ -1,10 +1,28 @@
-<!-- LOVABLE:BEGIN -->
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
-<!-- LOVABLE:END -->
+# AGENTS.md
+
+## Project: Let Me Think
+
+A lofi coding-music player with dynamic weather-based backgrounds and tech leader quotes.
+
+### Build & Run
+
+```sh
+npm run dev        # Start dev server
+npm run build      # Production build
+```
+
+### Code Style
+
+- TypeScript strict mode
+- Tailwind CSS utility classes (no inline styles except dynamic)
+- shadcn/ui components in `src/components/ui/`
+- Custom hooks in `src/lib/`
+- No comments unless requested
+
+### Key Files
+
+- `src/routes/index.tsx` — Main app component
+- `src/lib/useYouTubePlayer.ts` — YouTube player hook with persistence
+- `src/lib/quotes.ts` — 150+ tech leader quotes
+- `src/lib/useAmbience.ts` — Weather/location hook
+- `src/styles.css` — Global styles and theme

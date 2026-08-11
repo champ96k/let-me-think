@@ -50,21 +50,42 @@ async function reverseGeocode(lat: number, lon: number): Promise<Place> {
   }
 }
 
-
 async function fetchWeather(lat: number, lon: number) {
   const r = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,is_day&daily=sunrise,sunset&timezone=auto`,
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=sunrise,sunset&timezone=auto`,
   );
   const j = await r.json();
-  const isDay = j?.current?.is_day === 1;
+  // Use browser's local time for day/night so greeting matches the clock
+  const hour = new Date().getHours();
+  const isNight = hour < 6 || hour >= 19;
   return {
     temp: Math.round(j?.current?.temperature_2m ?? 0),
     sky: skyFromCode(Number(j?.current?.weather_code ?? 0)),
-    isNight: !isDay,
+    isNight,
   };
 }
 
 async function ipFallback(): Promise<{ lat: number; lon: number; place?: Place }> {
+  // Try ip-api.com first (more reliable, no key needed)
+  try {
+    const r = await fetch("https://ip-api.com/json/?fields=status,lat,lon,city,regionName,country");
+    const j = await r.json();
+    if (j?.status === "success" && typeof j.lat === "number") {
+      return {
+        lat: j.lat,
+        lon: j.lon,
+        place: {
+          city: j.city || "Somewhere",
+          region: j.regionName || "",
+          country: j.country || "",
+        },
+      };
+    }
+  } catch {
+    /* try next */
+  }
+
+  // Fallback to ipapi.co
   try {
     const r = await fetch("https://ipapi.co/json/");
     const j = await r.json();
@@ -73,15 +94,16 @@ async function ipFallback(): Promise<{ lat: number; lon: number; place?: Place }
         lat: j.latitude,
         lon: j.longitude,
         place: {
-          city: j.city ?? "Somewhere",
-          region: j.region ?? "",
-          country: j.country_name ?? "",
+          city: j.city || "Somewhere",
+          region: j.region || "",
+          country: j.country_name || "",
         },
       };
     }
   } catch {
     /* ignore */
   }
+
   return {
     lat: 35.6762,
     lon: 139.6503,
@@ -113,12 +135,11 @@ export function useAmbience(): Ambience {
       await load(lat, lon, denied, place);
     };
 
-
     if (typeof navigator !== "undefined" && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => load(pos.coords.latitude, pos.coords.longitude, false),
         () => useIp(true),
-        { timeout: 8000 },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 },
       );
     } else {
       void useIp(true);
