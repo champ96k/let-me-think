@@ -4,6 +4,7 @@ import {
   Cloud,
   CloudRain,
   CloudMoon,
+  Droplets,
   MapPin,
   Moon,
   Pause,
@@ -11,6 +12,7 @@ import {
   SkipBack,
   SkipForward,
   Sun,
+  Wind,
   Youtube,
 } from "lucide-react";
 
@@ -18,7 +20,7 @@ import bg from "@/assets/lofi-desk.jpg";
 import { RainLayer } from "@/components/RainLayer";
 import { StarsLayer } from "@/components/StarsLayer";
 import { useAmbience } from "@/lib/useAmbience";
-import { greeting, randomQuote } from "@/lib/quotes";
+import { greeting, randomQuote, type Quote } from "@/lib/quotes";
 import { PLAYLIST_ID, useYouTubePlayer } from "@/lib/useYouTubePlayer";
 
 export const Route = createFileRoute("/")({
