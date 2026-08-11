@@ -37,6 +37,7 @@ export function useYouTubePlayer(containerId: string) {
   const [playing, setPlaying] = useState(false);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [videoId, setVideoId] = useState("");
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
 
@@ -55,13 +56,23 @@ export function useYouTubePlayer(containerId: string) {
           playsinline: 1,
         },
         events: {
-          onReady: () => setReady(true),
+          onReady: () => {
+            setReady(true);
+            const d = playerRef.current?.getVideoData?.();
+            if (d) {
+              setTitle(d.title ?? "");
+              setAuthor(d.author ?? "");
+              setVideoId(d.video_id ?? "");
+            }
+            setDuration(playerRef.current?.getDuration?.() ?? 0);
+          },
           onStateChange: (e: any) => {
             setPlaying(e.data === 1);
             const d = playerRef.current?.getVideoData?.();
             if (d) {
               setTitle(d.title ?? "");
               setAuthor(d.author ?? "");
+              setVideoId(d.video_id ?? "");
             }
             setDuration(playerRef.current?.getDuration?.() ?? 0);
           },
@@ -88,6 +99,7 @@ export function useYouTubePlayer(containerId: string) {
       if (d?.title) {
         setTitle(d.title);
         setAuthor(d.author ?? "");
+        setVideoId(d.video_id ?? "");
       }
     }, 1000);
     return () => window.clearInterval(id);
@@ -116,6 +128,7 @@ export function useYouTubePlayer(containerId: string) {
     playing,
     title,
     author,
+    videoId,
     current,
     duration,
     play,
