@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 export type Sky = "clear" | "cloudy" | "rain";
 export type Ambience = {
   city: string;
+  region: string;
+  country: string;
   temp: number | null;
   sky: Sky;
   isNight: boolean;
@@ -12,6 +14,8 @@ export type Ambience = {
 
 const DEFAULT: Ambience = {
   city: "",
+  region: "",
+  country: "",
   temp: null,
   sky: "clear",
   isNight: false,
@@ -26,7 +30,9 @@ function skyFromCode(code: number): Sky {
   return "clear";
 }
 
-async function reverseGeocode(lat: number, lon: number): Promise<string> {
+type Place = { city: string; region: string; country: string };
+
+async function reverseGeocode(lat: number, lon: number): Promise<Place> {
   try {
     const r = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`,
@@ -34,11 +40,16 @@ async function reverseGeocode(lat: number, lon: number): Promise<string> {
     );
     const j = await r.json();
     const a = j?.address ?? {};
-    return a.city || a.town || a.village || a.county || a.state || "Somewhere";
+    return {
+      city: a.city || a.town || a.village || a.county || a.state || "Somewhere",
+      region: a.state || a.region || "",
+      country: a.country || "",
+    };
   } catch {
-    return "Somewhere";
+    return { city: "Somewhere", region: "", country: "" };
   }
 }
+
 
 async function fetchWeather(lat: number, lon: number) {
   const r = await fetch(
