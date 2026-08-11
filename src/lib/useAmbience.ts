@@ -64,17 +64,29 @@ async function fetchWeather(lat: number, lon: number) {
   };
 }
 
-async function ipFallback() {
+async function ipFallback(): Promise<{ lat: number; lon: number; place?: Place }> {
   try {
     const r = await fetch("https://ipapi.co/json/");
     const j = await r.json();
     if (typeof j?.latitude === "number") {
-      return { lat: j.latitude, lon: j.longitude, city: j.city as string };
+      return {
+        lat: j.latitude,
+        lon: j.longitude,
+        place: {
+          city: j.city ?? "Somewhere",
+          region: j.region ?? "",
+          country: j.country_name ?? "",
+        },
+      };
     }
   } catch {
     /* ignore */
   }
-  return { lat: 35.6762, lon: 139.6503, city: "Tokyo" };
+  return {
+    lat: 35.6762,
+    lon: 139.6503,
+    place: { city: "Tokyo", region: "Tokyo", country: "Japan" },
+  };
 }
 
 export function useAmbience(): Ambience {
@@ -83,9 +95,9 @@ export function useAmbience(): Ambience {
   useEffect(() => {
     let cancelled = false;
 
-    const load = async (lat: number, lon: number, denied: boolean, knownCity?: string) => {
-      const [city, weather] = await Promise.all([
-        knownCity ? Promise.resolve(knownCity) : reverseGeocode(lat, lon),
+    const load = async (lat: number, lon: number, denied: boolean, knownPlace?: Place) => {
+      const [place, weather] = await Promise.all([
+        knownPlace ? Promise.resolve(knownPlace) : reverseGeocode(lat, lon),
         fetchWeather(lat, lon).catch(() => ({
           temp: null,
           sky: "clear" as Sky,
@@ -93,13 +105,14 @@ export function useAmbience(): Ambience {
         })),
       ]);
       if (cancelled) return;
-      setState({ city, ...weather, loading: false, denied });
+      setState({ ...place, ...weather, loading: false, denied });
     };
 
     const useIp = async (denied: boolean) => {
-      const { lat, lon, city } = await ipFallback();
-      await load(lat, lon, denied, city);
+      const { lat, lon, place } = await ipFallback();
+      await load(lat, lon, denied, place);
     };
+
 
     if (typeof navigator !== "undefined" && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
