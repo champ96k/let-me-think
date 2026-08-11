@@ -89,7 +89,7 @@ function LetMeThink() {
   }, []);
 
   const key = `${amb.isNight ? "night" : "day"}-${amb.sky}`;
-  const look = OVERLAYS[key] ?? OVERLAYS["day-clear"];
+  const look = OVERLAYS[key] ?? OVERLAYS["day-clear"]!;
   const longTitle = player.title.length > 34;
 
   const trackTitle = useMemo(
