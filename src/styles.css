@@ -134,11 +134,7 @@
 
 @theme {
   --font-sans:
-    "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-display:
-    "Sora", ui-sans-serif, system-ui, sans-serif;
-  --font-quote:
-    "Fraunces", ui-serif, Georgia, serif;
+    "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {

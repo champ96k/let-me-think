@@ -4,7 +4,6 @@ import {
   Cloud,
   CloudRain,
   CloudMoon,
-  Droplets,
   MapPin,
   Moon,
   Pause,
@@ -12,7 +11,6 @@ import {
   SkipBack,
   SkipForward,
   Sun,
-  Wind,
   Youtube,
 } from "lucide-react";
 
@@ -20,7 +18,7 @@ import bg from "@/assets/lofi-desk.jpg";
 import { RainLayer } from "@/components/RainLayer";
 import { StarsLayer } from "@/components/StarsLayer";
 import { useAmbience } from "@/lib/useAmbience";
-import { greeting, randomQuote, type Quote } from "@/lib/quotes";
+import { greeting, randomQuote } from "@/lib/quotes";
 import { PLAYLIST_ID, useYouTubePlayer } from "@/lib/useYouTubePlayer";
 
 export const Route = createFileRoute("/")({
@@ -92,11 +90,11 @@ function LetMeThink() {
   const [unmuted, setUnmuted] = useState(false);
   const [clock, setClock] = useState("");
   const [hello, setHello] = useState("");
-  const [quote, setQuote] = useState<Quote | null>(null);
+  const [quote, setQuote] = useState("");
 
   useEffect(() => {
     setQuote(randomQuote());
-    const id = window.setInterval(() => setQuote((q) => randomQuote(q ?? undefined)), 20000);
+    const id = window.setInterval(() => setQuote((q) => randomQuote(q)), 20000);
     return () => window.clearInterval(id);
   }, []);
 
@@ -151,33 +149,15 @@ function LetMeThink() {
 
       {/* Top bar */}
       <div className="relative z-10 flex items-start justify-between gap-4 px-5 pt-5 sm:px-8 sm:pt-7">
-        <div className="text-legible glass rounded-2xl px-4 py-3 text-white/90 sm:px-5 sm:py-3.5">
-          <div className="flex items-center gap-3">
-            <WeatherIcon sky={amb.sky} isNight={amb.isNight} />
-            <div className="leading-tight">
-              <div className="font-display text-2xl font-light tabular-nums sm:text-3xl xl:text-4xl">
-                {amb.temp !== null ? `${amb.temp}°` : "--°"}
-              </div>
-              <div className="text-[11px] font-medium tracking-wide text-white/80 sm:text-xs xl:text-sm">
-                {amb.loading ? "locating…" : amb.label || "—"}
-              </div>
+        <div className="text-legible flex items-center gap-2.5 text-white/90">
+          <WeatherIcon sky={amb.sky} isNight={amb.isNight} />
+          <div className="leading-tight">
+            <div className="text-xl font-light tabular-nums sm:text-2xl">
+              {amb.temp !== null ? `${amb.temp}°` : "--°"}
             </div>
-          </div>
-          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-light tracking-wide text-white/65 sm:text-[11px] xl:text-xs">
-            <span>{amb.city || "—"}</span>
-            {amb.feelsLike !== null && <span>feels {amb.feelsLike}°</span>}
-            {amb.humidity !== null && (
-              <span className="inline-flex items-center gap-1">
-                <Droplets className="h-3 w-3" />
-                {amb.humidity}%
-              </span>
-            )}
-            {amb.wind !== null && (
-              <span className="inline-flex items-center gap-1">
-                <Wind className="h-3 w-3" />
-                {amb.wind} km/h
-              </span>
-            )}
+            <div className="text-[11px] font-light tracking-wide text-white/70">
+              {amb.loading ? "locating…" : amb.city || "—"}
+            </div>
           </div>
         </div>
 
@@ -193,32 +173,24 @@ function LetMeThink() {
       </div>
 
       {/* Center: clock, greeting, quote */}
-      <div className="text-legible relative z-10 mt-[14vh] px-6 text-center sm:mt-[18vh]">
-        <div className="font-display text-7xl font-semibold tracking-tight text-white tabular-nums sm:text-8xl lg:text-[9rem] xl:text-[11rem] 2xl:text-[13rem]">
+      <div className="text-legible relative z-10 mt-[16vh] px-6 text-center sm:mt-[20vh]">
+        <div className="text-7xl font-semibold tracking-tight text-white tabular-nums sm:text-8xl">
           {clock || "--:--"}
         </div>
-        <div className="font-display mt-4 text-2xl font-medium text-white/95 sm:text-4xl lg:text-5xl xl:text-6xl">
-          {hello}
-        </div>
-        <figure
-          key={quote?.text}
-          className="animate-fade-in mx-auto mt-10 max-w-xl sm:mt-14 lg:max-w-3xl xl:max-w-4xl"
+        <div className="mt-3 text-2xl font-medium text-white/95 sm:text-3xl">{hello}</div>
+        <p
+          key={quote}
+          className="animate-fade-in mx-auto mt-10 max-w-xl text-sm font-light italic leading-relaxed text-white/85 sm:mt-14 sm:text-base"
         >
-          <blockquote className="font-quote text-base font-light italic leading-relaxed text-white/90 sm:text-xl lg:text-2xl xl:text-3xl">
-            “{quote?.text}”
-          </blockquote>
-          <figcaption className="mt-3 text-[11px] font-medium uppercase tracking-[0.2em] text-white/60 sm:text-xs xl:text-sm">
-            {quote?.author}
-          </figcaption>
-        </figure>
+          “{quote}”
+        </p>
       </div>
 
       {/* Bottom-left location */}
-      <div className="text-legible absolute bottom-5 left-5 z-10 flex items-center gap-1.5 text-[11px] font-light tracking-wide text-white/75 sm:bottom-7 sm:left-8 sm:text-xs xl:text-sm">
+      <div className="text-legible absolute bottom-5 left-5 z-10 flex items-center gap-1.5 text-[11px] font-light tracking-wide text-white/75 sm:bottom-7 sm:left-8 sm:text-xs">
         <MapPin className="h-3.5 w-3.5" />
         <span className="max-w-[55vw] truncate">{amb.loading ? "locating…" : place || "—"}</span>
       </div>
-
 
       {/* Player pill */}
       <div className="absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-14 sm:pb-10">
