@@ -249,3 +249,13 @@
   background: oklch(0.98 0 0);
   cursor: pointer;
 }
+
+@keyframes spin-slow-kf {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin-slow-kf 8s linear infinite;
+}
