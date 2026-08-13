@@ -1,7 +1,11 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
+import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].mjs";
+import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
 import { a as Play, c as MapPin, d as CloudMoon, i as Settings, l as Cloud, n as SkipForward, o as Pause, r as SkipBack, s as Moon, t as Sun, u as CloudRain } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CEvxc_SO.js
+import { n as SwitchThumb, t as Switch$1 } from "../_libs/@radix-ui/react-switch+[...].mjs";
+import { t as clsx } from "../_libs/clsx.mjs";
+import { t as twMerge } from "../_libs/tailwind-merge.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-eZYKZ6YR.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var lofi_desk_default = "/assets/lofi-desk-DvyhfhWN.png";
@@ -1193,6 +1197,16 @@ function useYouTubePlayer(containerId) {
 		}, [])
 	};
 }
+function cn(...inputs) {
+	return twMerge(clsx(inputs));
+}
+var Switch = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Switch$1, {
+	className: cn("peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input", className),
+	...props,
+	ref,
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SwitchThumb, { className: cn("pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0") })
+}));
+Switch.displayName = Switch$1.displayName;
 function fmt(sec) {
 	if (!Number.isFinite(sec) || sec < 0) sec = 0;
 	return `${Math.floor(sec / 60)}:${Math.floor(sec % 60).toString().padStart(2, "0")}`;
@@ -1464,12 +1478,10 @@ function LetMeThink() {
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "text-sm text-white/85",
 								children: "24-hour clock"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-								onClick: () => setUse24h((v) => !v),
-								className: `relative h-5 w-9 rounded-full transition-colors ${use24h ? "bg-white/30" : "bg-white/15"}`,
-								role: "switch",
-								"aria-checked": use24h,
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: `absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${use24h ? "translate-x-4" : "translate-x-0.5"}` })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Switch, {
+								checked: use24h,
+								onCheckedChange: setUse24h,
+								className: "bg-white/20 data-[state=checked]:bg-[oklch(0.72_0.19_145)] [&>span]:bg-white [&>span]:shadow-md"
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -1477,12 +1489,10 @@ function LetMeThink() {
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "text-sm text-white/85",
 								children: "Show time"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-								onClick: () => setShowTime((v) => !v),
-								className: `relative h-5 w-9 rounded-full transition-colors ${showTime ? "bg-white/30" : "bg-white/15"}`,
-								role: "switch",
-								"aria-checked": showTime,
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: `absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${showTime ? "translate-x-4" : "translate-x-0.5"}` })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Switch, {
+								checked: showTime,
+								onCheckedChange: setShowTime,
+								className: "bg-white/20 data-[state=checked]:bg-[oklch(0.72_0.19_145)] [&>span]:bg-white [&>span]:shadow-md"
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -1490,12 +1500,10 @@ function LetMeThink() {
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "text-sm text-white/85",
 								children: "Show quotes"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-								onClick: () => setShowQuotes((v) => !v),
-								className: `relative h-5 w-9 rounded-full transition-colors ${showQuotes ? "bg-white/30" : "bg-white/15"}`,
-								role: "switch",
-								"aria-checked": showQuotes,
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: `absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${showQuotes ? "translate-x-4" : "translate-x-0.5"}` })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Switch, {
+								checked: showQuotes,
+								onCheckedChange: setShowQuotes,
+								className: "bg-white/20 data-[state=checked]:bg-[oklch(0.72_0.19_145)] [&>span]:bg-white [&>span]:shadow-md"
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "my-3 h-px bg-white/10" }),

@@ -20,6 +20,7 @@ import { StarsLayer } from "@/components/StarsLayer";
 import { useAmbience } from "@/lib/useAmbience";
 import { greeting, randomQuote, type Quote } from "@/lib/quotes";
 import { PLAYLIST_ID, useYouTubePlayer } from "@/lib/useYouTubePlayer";
+import { Switch } from "@/components/ui/switch";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -320,58 +321,31 @@ function LetMeThink() {
             {/* 24h toggle */}
             <div className="flex items-center justify-between py-2">
               <span className="text-sm text-white/85">24-hour clock</span>
-              <button
-                onClick={() => setUse24h((v) => !v)}
-                className={`relative h-5 w-9 rounded-full transition-colors ${
-                  use24h ? "bg-white/30" : "bg-white/15"
-                }`}
-                role="switch"
-                aria-checked={use24h}
-              >
-                <span
-                  className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${
-                    use24h ? "translate-x-4" : "translate-x-0.5"
-                  }`}
-                />
-              </button>
+              <Switch
+                checked={use24h}
+                onCheckedChange={setUse24h}
+                className="bg-white/20 data-[state=checked]:bg-[oklch(0.72_0.19_145)] [&>span]:bg-white [&>span]:shadow-md"
+              />
             </div>
 
             {/* Show time toggle */}
             <div className="flex items-center justify-between py-2">
               <span className="text-sm text-white/85">Show time</span>
-              <button
-                onClick={() => setShowTime((v) => !v)}
-                className={`relative h-5 w-9 rounded-full transition-colors ${
-                  showTime ? "bg-white/30" : "bg-white/15"
-                }`}
-                role="switch"
-                aria-checked={showTime}
-              >
-                <span
-                  className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${
-                    showTime ? "translate-x-4" : "translate-x-0.5"
-                  }`}
-                />
-              </button>
+              <Switch
+                checked={showTime}
+                onCheckedChange={setShowTime}
+                className="bg-white/20 data-[state=checked]:bg-[oklch(0.72_0.19_145)] [&>span]:bg-white [&>span]:shadow-md"
+              />
             </div>
 
-            {/* Hide quotes toggle */}
+            {/* Show quotes toggle */}
             <div className="flex items-center justify-between py-2">
               <span className="text-sm text-white/85">Show quotes</span>
-              <button
-                onClick={() => setShowQuotes((v) => !v)}
-                className={`relative h-5 w-9 rounded-full transition-colors ${
-                  showQuotes ? "bg-white/30" : "bg-white/15"
-                }`}
-                role="switch"
-                aria-checked={showQuotes}
-              >
-                <span
-                  className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${
-                    showQuotes ? "translate-x-4" : "translate-x-0.5"
-                  }`}
-                />
-              </button>
+              <Switch
+                checked={showQuotes}
+                onCheckedChange={setShowQuotes}
+                className="bg-white/20 data-[state=checked]:bg-[oklch(0.72_0.19_145)] [&>span]:bg-white [&>span]:shadow-md"
+              />
             </div>
 
             {/* Divider */}
