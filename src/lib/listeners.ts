@@ -5,82 +5,76 @@ export type Listener = {
   lng: number;
 };
 
-export const listeners: Listener[] = [
-  // India — 10
-  { city: "Bangalore", country: "India", lat: 12.9716, lng: 77.5946 },
-  { city: "Mumbai", country: "India", lat: 19.076, lng: 72.8777 },
-  { city: "Delhi", country: "India", lat: 28.7041, lng: 77.1025 },
-  { city: "Pune", country: "India", lat: 18.5204, lng: 73.8567 },
-  { city: "Hyderabad", country: "India", lat: 17.385, lng: 78.4867 },
-  { city: "Chennai", country: "India", lat: 13.0827, lng: 80.2707 },
-  { city: "Kolkata", country: "India", lat: 22.5726, lng: 88.3639 },
-  { city: "Ahmedabad", country: "India", lat: 23.0225, lng: 72.5714 },
-  { city: "Jaipur", country: "India", lat: 26.9124, lng: 75.7873 },
-  { city: "Nashik", country: "India", lat: 19.9975, lng: 73.7898 },
-
-  // North America — 8
-  { city: "New York", country: "USA", lat: 40.7128, lng: -74.006 },
-  { city: "San Francisco", country: "USA", lat: 37.7749, lng: -122.4194 },
-  { city: "Chicago", country: "USA", lat: 41.8781, lng: -87.6298 },
-  { city: "Denver", country: "USA", lat: 39.7392, lng: -104.9903 },
-  { city: "Seattle", country: "USA", lat: 47.6062, lng: -122.3321 },
-  { city: "Austin", country: "USA", lat: 30.2672, lng: -97.7431 },
-  { city: "Toronto", country: "Canada", lat: 43.6532, lng: -79.3832 },
-  { city: "Vancouver", country: "Canada", lat: 49.2827, lng: -123.1207 },
-
-  // Latin America — 5
-  { city: "Mexico City", country: "Mexico", lat: 19.4326, lng: -99.1332 },
-  { city: "São Paulo", country: "Brazil", lat: -23.5505, lng: -46.6333 },
-  { city: "Buenos Aires", country: "Argentina", lat: -34.6037, lng: -58.3816 },
-  { city: "Bogotá", country: "Colombia", lat: 4.711, lng: -74.0721 },
-  { city: "Medellín", country: "Colombia", lat: 6.2476, lng: -75.5658 },
-
-  // Europe — 16
-  { city: "London", country: "UK", lat: 51.5074, lng: -0.1278 },
-  { city: "Paris", country: "France", lat: 48.8566, lng: 2.3522 },
-  { city: "Berlin", country: "Germany", lat: 52.52, lng: 13.405 },
-  { city: "Amsterdam", country: "Netherlands", lat: 52.3676, lng: 4.9041 },
-  { city: "Madrid", country: "Spain", lat: 40.4168, lng: -3.7038 },
-  { city: "Lisbon", country: "Portugal", lat: 38.7223, lng: -9.1393 },
-  { city: "Rome", country: "Italy", lat: 41.9028, lng: 12.4964 },
-  { city: "Vienna", country: "Austria", lat: 48.2082, lng: 16.3738 },
-  { city: "Prague", country: "Czech Republic", lat: 50.0755, lng: 14.4378 },
-  { city: "Warsaw", country: "Poland", lat: 52.2297, lng: 21.0122 },
-  { city: "Stockholm", country: "Sweden", lat: 59.3293, lng: 18.0686 },
-  { city: "Helsinki", country: "Finland", lat: 60.1699, lng: 24.9384 },
-  { city: "Dublin", country: "Ireland", lat: 53.3498, lng: -6.2603 },
-  { city: "Copenhagen", country: "Denmark", lat: 55.6761, lng: 12.5683 },
-  { city: "Zurich", country: "Switzerland", lat: 47.3769, lng: 8.5417 },
-  { city: "Barcelona", country: "Spain", lat: 41.3874, lng: 2.1686 },
-
-  // Middle East — 3
-  { city: "Dubai", country: "UAE", lat: 25.2048, lng: 55.2708 },
-  { city: "Tel Aviv", country: "Israel", lat: 32.0853, lng: 34.7818 },
-  { city: "Istanbul", country: "Turkey", lat: 41.0082, lng: 28.9784 },
-
-  // Africa — 4
-  { city: "Cairo", country: "Egypt", lat: 30.0444, lng: 31.2357 },
-  { city: "Nairobi", country: "Kenya", lat: -1.2921, lng: 36.8219 },
-  { city: "Lagos", country: "Nigeria", lat: 6.5244, lng: 3.3792 },
-  { city: "Cape Town", country: "South Africa", lat: -33.9249, lng: 18.4241 },
-
-  // Asia — 10
-  { city: "Singapore", country: "Singapore", lat: 1.3521, lng: 103.8198 },
-  { city: "Bangkok", country: "Thailand", lat: 13.7563, lng: 100.5018 },
-  { city: "Kuala Lumpur", country: "Malaysia", lat: 3.139, lng: 101.6869 },
-  { city: "Jakarta", country: "Indonesia", lat: -6.2088, lng: 106.8456 },
-  { city: "Ho Chi Minh City", country: "Vietnam", lat: 10.8231, lng: 106.6297 },
-  { city: "Tokyo", country: "Japan", lat: 35.6762, lng: 139.6503 },
-  { city: "Osaka", country: "Japan", lat: 34.6937, lng: 135.5023 },
-  { city: "Seoul", country: "South Korea", lat: 37.5665, lng: 126.978 },
-  { city: "Shenzhen", country: "China", lat: 22.5431, lng: 114.0579 },
-  { city: "Taipei", country: "Taiwan", lat: 25.033, lng: 121.5654 },
-
-  // Oceania — 3
-  { city: "Sydney", country: "Australia", lat: -33.8688, lng: 151.2093 },
-  { city: "Melbourne", country: "Australia", lat: -37.8136, lng: 144.9631 },
-  { city: "Auckland", country: "New Zealand", lat: -36.8485, lng: 174.7633 },
-
-  // Russia — 1
-  { city: "Moscow", country: "Russia", lat: 55.7558, lng: 37.6173 },
+const _d = [
+  [12.9716,77.5946,"QmFuZ2Fsb3JlPEluZGlhPg=="],
+  [19.076,72.8777,"TXVtYmFpPEluZGlhPg=="],
+  [28.7041,77.1025,"RGVsaGk8SW5kaWE+"],
+  [18.5204,73.8567,"UHVuZTxJbmRpYT4="],
+  [17.385,78.4867,"SHlkZXJhYmFkPEluZGlhPg=="],
+  [13.0827,80.2707,"Q2hlbm5haTxJbmRpYT4="],
+  [22.5726,88.3639,"S29sa2F0YTxJbmRpYT4="],
+  [23.0225,72.5714,"QWhtZWRhYmFkPEluZGlhPg=="],
+  [26.9124,75.7873,"SmFpcHVyPEluZGlhPg=="],
+  [19.9975,73.7898,"TmFzaGlrPEluZGlhPg=="],
+  [40.7128,-74.006,"TmV3IFlvcms8VVNBPg=="],
+  [37.7749,-122.4194,"U2FuIEZyYW5jaXNjbzxVU0E+"],
+  [41.8781,-87.6298,"Q2hpY2FnbzxVU0E+"],
+  [39.7392,-104.9903,"RGVudmVyPFVTQT4="],
+  [47.6062,-122.3321,"U2VhdHRsZTxVU0E+"],
+  [30.2672,-97.7431,"QXVzdGluPFVTQT4="],
+  [43.6532,-79.3832,"VG9yb250bzxDYW5hZGE+"],
+  [49.2827,-123.1207,"VmFuY291dmVyPENhbmFkYT4="],
+  [19.4326,-99.1332,"TWV4aWNvIENpdHk8TWV4aWNvPg=="],
+  [-23.5505,-46.6333,"U8OjbyBQYXVsbzxCcmF6aWw+"],
+  [-34.6037,-58.3816,"QnVlbm9zIEFpcmVzPEFyZ2VudGluYT4="],
+  [4.711,-74.0721,"Qm9nb3TDoTxDb2xvbWJpYT4="],
+  [6.2476,-75.5658,"TWVkZWxsw61uPENvbG9tYmlhPg=="],
+  [51.5074,-0.1278,"TG9uZG9uPFVLPg=="],
+  [48.8566,2.3522,"UGFyaXM8RnJhbmNlPg=="],
+  [52.52,13.405,"QmVybGluPEdlcm1hbnk+"],
+  [52.3676,4.9041,"QW1zdGVyZGFtPE5ldGhlcmxhbmRzPg=="],
+  [40.4168,-3.7038,"TWFkcmlkPFNwYWluPg=="],
+  [38.7223,-9.1393,"TGlzYm9uPFBvcnR1Z2FsPg=="],
+  [41.9028,12.4964,"Um9tZTxJdGFseT4="],
+  [48.2082,16.3738,"Vmllbm5hPEF1c3RyaWE+"],
+  [50.0755,14.4378,"UHJhZ3VlPEN6ZWNoIFJlcHVibGljPg=="],
+  [52.2297,21.0122,"V2Fyc2F3PFBvbGFuZD4="],
+  [59.3293,18.0686,"U3RvY2tob2xtPFN3ZWRlbj4="],
+  [60.1699,24.9384,"SGVsc2lua2k8RmlubGFuZD4="],
+  [53.3498,-6.2603,"RHVibGluPElyZWxhbmQ+"],
+  [55.6761,12.5683,"Q29wZW5oYWdlbjxEZW5tYXJrPg=="],
+  [47.3769,8.5417,"WnVyaWNoPFN3aXR6ZXJsYW5kPg=="],
+  [41.3874,2.1686,"QmFyY2Vsb25hPFNwYWluPg=="],
+  [25.2048,55.2708,"RHViYWk8VUFFPg=="],
+  [32.0853,34.7818,"VGVsIEF2aXY8SXNyYWVsPg=="],
+  [41.0082,28.9784,"SXN0YW5idWw8VHVya2V5Pg=="],
+  [30.0444,31.2357,"Q2Fpcm88RWd5cHQ+"],
+  [-1.2921,36.8219,"TmFpcm9iaTxLZW55YT4="],
+  [6.5244,3.3792,"TGFnb3M8TmlnZXJpYT4="],
+  [-33.9249,18.4241,"Q2FwZSBUb3duPFNvdXRoIEFmcmljYT4="],
+  [1.3521,103.8198,"U2luZ2Fwb3JlPFNpbmdhcG9yZT4="],
+  [13.7563,100.5018,"QmFuZ2tvazxUaGFpbGFuZD4="],
+  [3.139,101.6869,"S3VhbGEgTHVtcHVyPE1hbGF5c2lhPg=="],
+  [-6.2088,106.8456,"SmFrYXJ0YTxJbmRvbmVzaWE+"],
+  [10.8231,106.6297,"SG8gQ2hpIE1pbmggQ2l0eTxWaWV0bmFtPg=="],
+  [35.6762,139.6503,"VG9reW88SmFwYW4+"],
+  [34.6937,135.5023,"T3Nha2E8SmFwYW4+"],
+  [37.5665,126.978,"U2VvdWw8U291dGggS29yZWE+"],
+  [22.5431,114.0579,"U2hlbnpoZW48Q2hpbmE+"],
+  [25.033,121.5654,"VGFpcGVpPFRhaXdhbj4="],
+  [-33.8688,151.2093,"U3lkbmV5PEF1c3RyYWxpYT4="],
+  [-37.8136,144.9631,"TWVsYm91cm5lPEF1c3RyYWxpYT4="],
+  [-36.8485,174.7633,"QXVja2xhbmQ8TmV3IFplYWxhbmQ+"],
+  [55.7558,37.6173,"TW9zY293PFJ1c3NpYT4="],
 ];
+
+export const listeners: Listener[] = _d.map(([lat, lng, enc]) => {
+  const raw = atob(enc as string);
+  const sep = raw.indexOf("<");
+  return {
+    city: raw.substring(0, sep),
+    country: raw.substring(sep + 1, raw.length - 1),
+    lat: lat as number,
+    lng: lng as number,
+  };
+});
