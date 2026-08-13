@@ -6,7 +6,7 @@ import { a as Play, c as MapPin, d as CloudMoon, i as Settings, l as Cloud, n as
 import { n as SwitchThumb, t as Switch$1 } from "../_libs/@radix-ui/react-switch+[...].mjs";
 import { t as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-B7Jobbtq.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CQ6ig_K9.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var import_react_dom = /* @__PURE__ */ __toESM(require_react_dom());
@@ -1213,7 +1213,7 @@ var Switch = import_react.forwardRef(({ className, ...props }, ref) => /* @__PUR
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SwitchThumb, { className: cn("pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0") })
 }));
 Switch.displayName = Switch$1.displayName;
-var EARTH_IMG = "//cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg";
+var EARTH_IMG = "https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg";
 var ringColor = (t) => `rgba(115, 230, 160, ${(1 - t) * .55})`;
 function WorldGlobe({ activeListeners, userLocation }) {
 	const [Globe, setGlobe] = (0, import_react.useState)(null);

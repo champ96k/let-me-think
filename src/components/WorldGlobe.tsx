@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { Listener } from "@/lib/listeners";
 
 const EARTH_IMG =
-  "//cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg";
+  "https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg";
 
 const ringColor = (t: number) =>
   `rgba(115, 230, 160, ${(1 - t) * 0.55})`;
