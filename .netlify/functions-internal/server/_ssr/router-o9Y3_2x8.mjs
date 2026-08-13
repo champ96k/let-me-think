@@ -4,10 +4,10 @@ import { c as HeadContent, d as Outlet, f as lazyRouteComponent, g as useRouter,
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { t as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-C4fiEgol.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-o9Y3_2x8.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-BRsN-wCu.css";
+var styles_default = "/assets/styles-CSEE91QL.css";
 function reportRuntimeError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__appEvents?.captureException?.(error, {
