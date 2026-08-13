@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   Cloud,
   CloudRain,
@@ -21,6 +22,10 @@ import { useAmbience } from "@/lib/useAmbience";
 import { greeting, randomQuote, type Quote } from "@/lib/quotes";
 import { PLAYLIST_ID, useYouTubePlayer } from "@/lib/useYouTubePlayer";
 import { Switch } from "@/components/ui/switch";
+import { WorldGlobe } from "@/components/WorldGlobe";
+import { listeners } from "@/lib/listeners";
+import { useKeyboardShortcuts } from "@/lib/useKeyboardShortcuts";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -116,6 +121,8 @@ function LetMeThink() {
   });
   const [settingsOpen, setSettingsOpen] = useState(false);
   const settingsRef = useRef<HTMLDivElement>(null);
+  const [showGlobe, setShowGlobe] = useState(false);
+  const isMobile = useIsMobile();
 
   // Persist settings to localStorage
   useEffect(() => {
@@ -196,8 +203,17 @@ function LetMeThink() {
 
   const place = [amb.city, amb.region, amb.country].filter(Boolean).join(", ");
 
+  useKeyboardShortcuts({
+    onTogglePlay: handleToggle,
+    onNext: player.next,
+    onPrev: player.prev,
+    onToggleGlobe: () => setShowGlobe((v) => !v),
+    onCloseGlobe: () => setShowGlobe(false),
+    onToggleSettings: () => setSettingsOpen((o) => !o),
+  });
+
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-black">
+    <main className="relative min-h-screen w-full overflow-x-hidden bg-black">
       {/* Background image + ambient treatment */}
       <img
         src={bg}
@@ -216,37 +232,41 @@ function LetMeThink() {
         <div id="lmt-yt-player" />
       </div>
 
-      {/* Debug badge — shows player state (remove after debugging) */}
-      <div className="fixed bottom-3 left-3 z-50 rounded-md bg-black/70 px-2 py-1 text-[10px] text-white/70 backdrop-blur-sm">
-        YT: {player.ready ? (player.playing ? "▶ Playing" : "⏸ Ready") : "⏳ Loading"}
-        {player.title ? ` • ${player.title}` : ""}
-      </div>
-
       {/* Top bar */}
-      <div className="relative z-10 flex items-start justify-between gap-4 px-5 pt-5 sm:px-8 sm:pt-7">
-        <div className="text-legible flex items-center gap-2.5 text-white/90">
+      <div className="relative z-10 flex items-center justify-between gap-2 px-3 pt-4 sm:gap-4 sm:px-8 sm:pt-7">
+        <div className="text-legible flex shrink-0 items-center gap-1.5 text-white/90 sm:gap-2.5">
           <WeatherIcon sky={amb.sky} isNight={amb.isNight} />
           <div className="leading-tight">
-            <div className="text-xl font-light tabular-nums sm:text-2xl">
+            <div className="text-base font-light tabular-nums sm:text-2xl">
               {amb.temp !== null ? `${amb.temp}°` : "--°"}
             </div>
-            <div className="text-[11px] font-light tracking-wide text-white/70">
+            <div className="text-[9px] font-light tracking-wide text-white/70 sm:text-[11px]">
               {amb.loading ? "locating…" : amb.city || "—"}
             </div>
           </div>
         </div>
+
+        <button
+          onClick={() => setShowGlobe((v) => !v)}
+          className="glass flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-white/80 transition hover:text-white sm:gap-2 sm:px-3"
+        >
+          <span className="pulse-dot inline-block h-2 w-2 shrink-0 rounded-full bg-[oklch(0.72_0.19_145)]" />
+          <span className="whitespace-nowrap text-[11px] font-medium tracking-wide sm:text-xs">
+            {listeners.length} minds in flow
+          </span>
+        </button>
 
         <a
           href={`https://www.youtube.com/playlist?list=${PLAYLIST_ID}`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Open the playlist on YouTube Music"
-          className="shrink-0 flex items-center gap-2 rounded-full px-3 py-2 text-white/90 transition hover:text-white"
+          className="shrink-0 flex items-center gap-1 rounded-full px-2 py-1.5 text-white/90 transition hover:text-white sm:gap-2 sm:px-3 sm:py-2"
         >
-          <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+          <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5 sm:h-4 sm:w-4">
             <path d="M8 5v14l11-7z" />
           </svg>
-          <span className="text-sm font-medium">YT Music</span>
+          <span className="text-[11px] font-medium sm:text-sm">YT Music</span>
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -254,7 +274,7 @@ function LetMeThink() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="h-3.5 w-3.5 text-white/50"
+            className="hidden h-3 w-3 text-white/50 sm:block"
           >
             <path d="M7 17L17 7" />
             <path d="M7 7h10v10" />
@@ -294,8 +314,27 @@ function LetMeThink() {
         )}
       </div>
 
+      {/* Globe overlay — full screen, portaled to body to escape overflow stacking */}
+      {showGlobe &&
+        createPortal(
+          <div className="globe-section-enter fixed inset-0 z-50 flex flex-col items-center justify-center overflow-visible bg-black/80 backdrop-blur-sm">
+            <div className="text-legible mb-2 text-center text-xs font-light tracking-wider text-white/50 sm:mb-4 sm:text-sm">
+              People are listening from around the world
+            </div>
+            <WorldGlobe userLocation={{ lat: amb.lat, lng: amb.lng, city: amb.city }} />
+            <button
+              onClick={() => setShowGlobe(false)}
+              className="mt-3 flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-light text-white/50 transition hover:text-white sm:mt-4 sm:text-sm"
+            >
+              Close
+              <kbd className="kbd">Esc</kbd>
+            </button>
+          </div>,
+          document.body,
+        )}
+
       {/* Bottom-left location */}
-      <div className="text-legible absolute bottom-5 left-5 z-10 flex items-center gap-1.5 text-[11px] font-light tracking-wide text-white/75 sm:bottom-7 sm:left-8 sm:text-xs">
+      <div className="text-legible absolute bottom-5 left-5 z-10 flex items-center gap-1.5 text-[10px] font-light tracking-wide text-white/75 sm:bottom-7 sm:left-8 sm:text-xs">
         <MapPin className="h-3.5 w-3.5" />
         <span className="max-w-[55vw] truncate">{amb.loading ? "locating…" : place || "—"}</span>
       </div>
@@ -375,15 +414,51 @@ function LetMeThink() {
                 </a>
               </div>
             </div>
+
+            {/* Keyboard shortcuts — desktop only */}
+            {!isMobile && (
+              <>
+                <div className="my-3 h-px bg-white/10" />
+                <div className="mb-3 text-xs font-medium uppercase tracking-widest text-white/50">
+                  Keyboard shortcuts
+                </div>
+                <div className="space-y-1.5 text-xs text-white/70">
+                  <div className="flex items-center justify-between">
+                    <span>Play / Pause</span>
+                    <kbd className="kbd">Space</kbd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Next track</span>
+                    <kbd className="kbd">→</kbd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Previous track</span>
+                    <kbd className="kbd">←</kbd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Toggle globe</span>
+                    <kbd className="kbd">G</kbd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Close globe</span>
+                    <kbd className="kbd">Esc</kbd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Settings</span>
+                    <kbd className="kbd">S</kbd>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>
 
       {/* Player pill */}
-      <div className="absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-14 sm:pb-10">
-        <div className="glass flex w-full max-w-xl items-center gap-4 rounded-full py-3 pl-3 pr-4 sm:py-3.5 sm:pl-3.5 sm:pr-6">
+      <div className="absolute inset-x-0 bottom-0 z-10 flex justify-center px-3 pb-20 sm:px-4 sm:pb-16">
+        <div className="glass flex w-full max-w-xl items-center gap-2.5 rounded-full py-2.5 pl-2.5 pr-3 sm:items-center sm:gap-4 sm:py-3.5 sm:pl-3.5 sm:pr-6">
           <div
-            className={`relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-1 ring-white/25 sm:h-16 sm:w-16 ${
+            className={`relative h-10 w-10 shrink-0 overflow-hidden rounded-full ring-1 ring-white/25 sm:h-16 sm:w-16 ${
               player.playing ? "spin-slow" : ""
             }`}
           >
@@ -392,14 +467,14 @@ function LetMeThink() {
             ) : (
               <div className="h-full w-full bg-white/15" />
             )}
-            <div className="absolute inset-0 m-auto h-2.5 w-2.5 rounded-full bg-black/60" />
+            <div className="absolute inset-0 m-auto h-2 w-2 rounded-full bg-black/60 sm:h-2.5 sm:w-2.5" />
           </div>
 
           <div className="min-w-0 flex-1">
-            <div className="truncate text-sm font-medium text-white sm:text-base">
+            <div className="truncate text-xs font-medium text-white sm:text-base">
               {player.title || (player.ready ? "Loading track…" : "Let Me Think")}
             </div>
-            <div className="mt-0.5 truncate text-xs font-light text-white/65">
+            <div className="mt-0.5 truncate text-[10px] font-light text-white/65 sm:text-xs">
               {player.author || "lofi beats for building things quietly"}
             </div>
 
@@ -419,35 +494,35 @@ function LetMeThink() {
               onMouseUp={(e) => player.commitSeek(Number(e.currentTarget.value))}
               onTouchEnd={(e) => player.commitSeek(Number(e.currentTarget.value))}
               onKeyUp={(e) => player.commitSeek(Number(e.currentTarget.value))}
-              className="seek-range mt-2 w-full"
+              className="seek-range mt-1.5 w-full sm:mt-2"
             />
-            <div className="mt-1 text-[11px] font-light tabular-nums text-white/60">
+            <div className="mt-0.5 text-[9px] font-light tabular-nums text-white/60 sm:text-[11px]">
               {fmt(player.current)} / {fmt(player.duration)}
             </div>
           </div>
 
-          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <div className="flex shrink-0 items-center gap-1 sm:gap-3">
             <button
               onClick={player.prev}
               aria-label="Previous track"
-              className="rounded-full p-1.5 text-white/70 transition hover:text-white"
+              className="rounded-full p-1 text-white/70 transition hover:text-white sm:p-1.5"
             >
-              <SkipBack className="h-4 w-4" />
+              <SkipBack className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </button>
             <button
               onClick={handleToggle}
               disabled={!player.ready}
               aria-label={player.playing ? "Pause" : "Play"}
-              className="rounded-full bg-white/90 p-3 text-neutral-900 transition hover:bg-white disabled:opacity-50"
+              className="rounded-full bg-white/90 p-2 text-neutral-900 transition hover:bg-white disabled:opacity-50 sm:p-3"
             >
-              {player.playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              {player.playing ? <Pause className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> : <Play className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
             </button>
             <button
               onClick={player.next}
               aria-label="Next track"
-              className="rounded-full p-1.5 text-white/70 transition hover:text-white"
+              className="rounded-full p-1 text-white/70 transition hover:text-white sm:p-1.5"
             >
-              <SkipForward className="h-4 w-4" />
+              <SkipForward className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </button>
           </div>
         </div>

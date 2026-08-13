@@ -10,6 +10,8 @@ export type Ambience = {
   isNight: boolean;
   loading: boolean;
   denied: boolean;
+  lat: number;
+  lng: number;
 };
 
 const DEFAULT: Ambience = {
@@ -21,6 +23,8 @@ const DEFAULT: Ambience = {
   isNight: false,
   loading: true,
   denied: false,
+  lat: 0,
+  lng: 0,
 };
 
 function skyFromCode(code: number): Sky {
@@ -127,7 +131,7 @@ export function useAmbience(): Ambience {
         })),
       ]);
       if (cancelled) return;
-      setState({ ...place, ...weather, loading: false, denied });
+      setState({ ...place, ...weather, loading: false, denied, lat, lng: lon });
     };
 
     const useIp = async (denied: boolean) => {

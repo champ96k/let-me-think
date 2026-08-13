@@ -272,3 +272,65 @@
 .spin-slow {
   animation: spin-slow-kf 8s linear infinite;
 }
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.6);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes globe-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.globe-section-enter {
+  animation: globe-reveal 0.3s ease-out forwards;
+}
+
+.globe-tooltip {
+  background: color-mix(in oklab, oklch(0 0 0) 80%, transparent);
+  backdrop-filter: blur(10px);
+  color: oklch(0.95 0 0);
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: "Inter", sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px oklch(0 0 0 / 0.4);
+  border: 1px solid rgba(115, 230, 160, 0.35);
+}
+
+.globe-tooltip--you {
+  border-color: rgba(34, 211, 238, 0.5);
+  color: #22d3ee;
+  font-weight: 500;
+}
+
+.kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: color-mix(in oklab, oklch(1 0 0) 10%, transparent);
+  border: 1px solid color-mix(in oklab, oklch(1 0 0) 15%, transparent);
+  font-family: "Inter", monospace;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+  color: oklch(0.9 0 0);
+}

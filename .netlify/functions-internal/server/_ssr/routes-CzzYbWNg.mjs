@@ -1,13 +1,15 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].mjs";
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
+import { n as require_react_dom } from "../_libs/@radix-ui/react-primitive+[...].mjs";
 import { a as Play, c as MapPin, d as CloudMoon, i as Settings, l as Cloud, n as SkipForward, o as Pause, r as SkipBack, s as Moon, t as Sun, u as CloudRain } from "../_libs/lucide-react.mjs";
 import { n as SwitchThumb, t as Switch$1 } from "../_libs/@radix-ui/react-switch+[...].mjs";
 import { t as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-eZYKZ6YR.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CzzYbWNg.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
+var import_react_dom = /* @__PURE__ */ __toESM(require_react_dom());
 var lofi_desk_default = "/assets/lofi-desk-DvyhfhWN.png";
 var DROPS = Array.from({ length: 70 }, (_, i) => ({
 	left: i * 37 % 100,
@@ -60,7 +62,9 @@ var DEFAULT = {
 	sky: "clear",
 	isNight: false,
 	loading: true,
-	denied: false
+	denied: false,
+	lat: 0,
+	lng: 0
 };
 function skyFromCode(code) {
 	if ([0, 1].includes(code)) return "clear";
@@ -149,7 +153,9 @@ function useAmbience() {
 				...place,
 				...weather,
 				loading: false,
-				denied
+				denied,
+				lat,
+				lng: lon
 			});
 		};
 		const useIp = async (denied) => {
@@ -1207,6 +1213,466 @@ var Switch = import_react.forwardRef(({ className, ...props }, ref) => /* @__PUR
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SwitchThumb, { className: cn("pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0") })
 }));
 Switch.displayName = Switch$1.displayName;
+var listeners = [
+	{
+		city: "Bangalore",
+		country: "India",
+		lat: 12.9716,
+		lng: 77.5946
+	},
+	{
+		city: "Mumbai",
+		country: "India",
+		lat: 19.076,
+		lng: 72.8777
+	},
+	{
+		city: "Delhi",
+		country: "India",
+		lat: 28.7041,
+		lng: 77.1025
+	},
+	{
+		city: "Pune",
+		country: "India",
+		lat: 18.5204,
+		lng: 73.8567
+	},
+	{
+		city: "Hyderabad",
+		country: "India",
+		lat: 17.385,
+		lng: 78.4867
+	},
+	{
+		city: "Chennai",
+		country: "India",
+		lat: 13.0827,
+		lng: 80.2707
+	},
+	{
+		city: "Kolkata",
+		country: "India",
+		lat: 22.5726,
+		lng: 88.3639
+	},
+	{
+		city: "Ahmedabad",
+		country: "India",
+		lat: 23.0225,
+		lng: 72.5714
+	},
+	{
+		city: "Jaipur",
+		country: "India",
+		lat: 26.9124,
+		lng: 75.7873
+	},
+	{
+		city: "Nashik",
+		country: "India",
+		lat: 19.9975,
+		lng: 73.7898
+	},
+	{
+		city: "New York",
+		country: "USA",
+		lat: 40.7128,
+		lng: -74.006
+	},
+	{
+		city: "Los Angeles",
+		country: "USA",
+		lat: 34.0522,
+		lng: -118.2437
+	},
+	{
+		city: "San Francisco",
+		country: "USA",
+		lat: 37.7749,
+		lng: -122.4194
+	},
+	{
+		city: "Chicago",
+		country: "USA",
+		lat: 41.8781,
+		lng: -87.6298
+	},
+	{
+		city: "Toronto",
+		country: "Canada",
+		lat: 43.6532,
+		lng: -79.3832
+	},
+	{
+		city: "Vancouver",
+		country: "Canada",
+		lat: 49.2827,
+		lng: -123.1207
+	},
+	{
+		city: "Mexico City",
+		country: "Mexico",
+		lat: 19.4326,
+		lng: -99.1332
+	},
+	{
+		city: "São Paulo",
+		country: "Brazil",
+		lat: -23.5505,
+		lng: -46.6333
+	},
+	{
+		city: "Buenos Aires",
+		country: "Argentina",
+		lat: -34.6037,
+		lng: -58.3816
+	},
+	{
+		city: "Bogotá",
+		country: "Colombia",
+		lat: 4.711,
+		lng: -74.0721
+	},
+	{
+		city: "London",
+		country: "UK",
+		lat: 51.5074,
+		lng: -.1278
+	},
+	{
+		city: "Paris",
+		country: "France",
+		lat: 48.8566,
+		lng: 2.3522
+	},
+	{
+		city: "Berlin",
+		country: "Germany",
+		lat: 52.52,
+		lng: 13.405
+	},
+	{
+		city: "Amsterdam",
+		country: "Netherlands",
+		lat: 52.3676,
+		lng: 4.9041
+	},
+	{
+		city: "Madrid",
+		country: "Spain",
+		lat: 40.4168,
+		lng: -3.7038
+	},
+	{
+		city: "Lisbon",
+		country: "Portugal",
+		lat: 38.7223,
+		lng: -9.1393
+	},
+	{
+		city: "Rome",
+		country: "Italy",
+		lat: 41.9028,
+		lng: 12.4964
+	},
+	{
+		city: "Vienna",
+		country: "Austria",
+		lat: 48.2082,
+		lng: 16.3738
+	},
+	{
+		city: "Prague",
+		country: "Czech Republic",
+		lat: 50.0755,
+		lng: 14.4378
+	},
+	{
+		city: "Warsaw",
+		country: "Poland",
+		lat: 52.2297,
+		lng: 21.0122
+	},
+	{
+		city: "Stockholm",
+		country: "Sweden",
+		lat: 59.3293,
+		lng: 18.0686
+	},
+	{
+		city: "Moscow",
+		country: "Russia",
+		lat: 55.7558,
+		lng: 37.6173
+	},
+	{
+		city: "Istanbul",
+		country: "Turkey",
+		lat: 41.0082,
+		lng: 28.9784
+	},
+	{
+		city: "Dubai",
+		country: "UAE",
+		lat: 25.2048,
+		lng: 55.2708
+	},
+	{
+		city: "Cairo",
+		country: "Egypt",
+		lat: 30.0444,
+		lng: 31.2357
+	},
+	{
+		city: "Nairobi",
+		country: "Kenya",
+		lat: -1.2921,
+		lng: 36.8219
+	},
+	{
+		city: "Lagos",
+		country: "Nigeria",
+		lat: 6.5244,
+		lng: 3.3792
+	},
+	{
+		city: "Cape Town",
+		country: "South Africa",
+		lat: -33.9249,
+		lng: 18.4241
+	},
+	{
+		city: "Singapore",
+		country: "Singapore",
+		lat: 1.3521,
+		lng: 103.8198
+	},
+	{
+		city: "Bangkok",
+		country: "Thailand",
+		lat: 13.7563,
+		lng: 100.5018
+	},
+	{
+		city: "Kuala Lumpur",
+		country: "Malaysia",
+		lat: 3.139,
+		lng: 101.6869
+	},
+	{
+		city: "Jakarta",
+		country: "Indonesia",
+		lat: -6.2088,
+		lng: 106.8456
+	},
+	{
+		city: "Ho Chi Minh City",
+		country: "Vietnam",
+		lat: 10.8231,
+		lng: 106.6297
+	},
+	{
+		city: "Tokyo",
+		country: "Japan",
+		lat: 35.6762,
+		lng: 139.6503
+	},
+	{
+		city: "Seoul",
+		country: "South Korea",
+		lat: 37.5665,
+		lng: 126.978
+	},
+	{
+		city: "Beijing",
+		country: "China",
+		lat: 39.9042,
+		lng: 116.4074
+	},
+	{
+		city: "Taipei",
+		country: "Taiwan",
+		lat: 25.033,
+		lng: 121.5654
+	},
+	{
+		city: "Sydney",
+		country: "Australia",
+		lat: -33.8688,
+		lng: 151.2093
+	},
+	{
+		city: "Melbourne",
+		country: "Australia",
+		lat: -37.8136,
+		lng: 144.9631
+	},
+	{
+		city: "Auckland",
+		country: "New Zealand",
+		lat: -36.8485,
+		lng: 174.7633
+	}
+];
+var EARTH_IMG = "//cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg";
+var ringColor = (t) => `rgba(115, 230, 160, ${(1 - t) * .55})`;
+function WorldGlobe({ userLocation }) {
+	const [Globe, setGlobe] = (0, import_react.useState)(null);
+	const [dimensions, setDimensions] = (0, import_react.useState)({
+		width: 700,
+		height: 700
+	});
+	const [error, setError] = (0, import_react.useState)(null);
+	(0, import_react.useEffect)(() => {
+		const updateSize = () => {
+			const w = window.innerWidth;
+			const h = window.innerHeight;
+			const size = Math.min(w - 48, h - 180, 700);
+			setDimensions({
+				width: size,
+				height: size
+			});
+		};
+		updateSize();
+		window.addEventListener("resize", updateSize);
+		return () => window.removeEventListener("resize", updateSize);
+	}, []);
+	(0, import_react.useEffect)(() => {
+		import("../_libs/react-globe.gl+react-kapsule.mjs").then((n) => n.t).then((mod) => {
+			setGlobe(() => mod.default);
+		}).catch((err) => {
+			console.error("Failed to load globe:", err);
+			setError(err.message);
+		});
+	}, []);
+	const onGlobeReady = (0, import_react.useCallback)((globe) => {
+		const setup = () => {
+			try {
+				const controls = globe.controls();
+				if (controls) {
+					controls.autoRotate = true;
+					controls.autoRotateSpeed = 1.2;
+					controls.enableZoom = true;
+					controls.enablePan = false;
+					controls.minDistance = 120;
+					controls.maxDistance = 800;
+					controls.zoomSpeed = 1.5;
+				}
+			} catch (err) {
+				console.error("Globe init error:", err);
+			}
+		};
+		setTimeout(setup, 100);
+	}, []);
+	if (error) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "flex items-center justify-center rounded-full border border-white/5 bg-white/[0.03]",
+		style: {
+			width: dimensions.width,
+			height: dimensions.height
+		},
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "text-xs text-red-400/70",
+			children: "Globe failed to load"
+		})
+	});
+	if (!Globe) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "flex items-center justify-center rounded-full border border-white/5 bg-white/[0.03]",
+		style: {
+			width: dimensions.width,
+			height: dimensions.height
+		},
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "text-xs text-white/30",
+			children: "Loading globe…"
+		})
+	});
+	const allPoints = userLocation?.lat ? [...listeners, {
+		city: userLocation.city || "You",
+		country: "",
+		lat: userLocation.lat,
+		lng: userLocation.lng,
+		isUser: true
+	}] : listeners;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "overflow-visible",
+		style: {
+			width: dimensions.width,
+			height: dimensions.height
+		},
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Globe, {
+			globeImageUrl: EARTH_IMG,
+			backgroundImageUrl: "",
+			backgroundColor: "rgba(0,0,0,0)",
+			width: dimensions.width,
+			height: dimensions.height,
+			onGlobeReady,
+			pointsData: allPoints,
+			pointLat: "lat",
+			pointLng: "lng",
+			pointAltitude: (d) => d.isUser ? .025 : .012,
+			pointRadius: (d) => d.isUser ? .9 : .6,
+			pointColor: (d) => d.isUser ? "#22d3ee" : "#73e6a0",
+			pointLabel: (d) => d.isUser ? `<div class="globe-tooltip globe-tooltip--you">📍 You are here</div>` : `<div class="globe-tooltip">${d.city}, ${d.country}</div>`,
+			ringsData: listeners,
+			ringLat: "lat",
+			ringLng: "lng",
+			ringColor,
+			ringMaxRadius: 2.5,
+			ringPropagationSpeed: 4,
+			ringRepeatPeriod: 2200,
+			ringsTransitionDuration: 0
+		})
+	});
+}
+function isTyping(target) {
+	const el = target;
+	return el?.tagName === "INPUT" || el?.tagName === "TEXTAREA" || el?.isContentEditable;
+}
+function useKeyboardShortcuts(h) {
+	(0, import_react.useEffect)(() => {
+		const onKey = (e) => {
+			if (isTyping(e.target)) return;
+			switch (e.code) {
+				case "Space":
+					e.preventDefault();
+					h.onTogglePlay();
+					break;
+				case "ArrowRight":
+					e.preventDefault();
+					h.onNext();
+					break;
+				case "ArrowLeft":
+					e.preventDefault();
+					h.onPrev();
+					break;
+				case "KeyG":
+					h.onToggleGlobe();
+					break;
+				case "Escape":
+					h.onCloseGlobe();
+					break;
+				case "KeyS": h.onToggleSettings();
+			}
+		};
+		document.addEventListener("keydown", onKey);
+		return () => document.removeEventListener("keydown", onKey);
+	}, [h]);
+}
+var MOBILE_BREAKPOINT = 768;
+function useIsMobile() {
+	const [isMobile, setIsMobile] = import_react.useState(void 0);
+	import_react.useEffect(() => {
+		const mql = window.matchMedia(`(max-width: 767px)`);
+		const onChange = () => {
+			setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+		};
+		mql.addEventListener("change", onChange);
+		setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+		return () => mql.removeEventListener("change", onChange);
+	}, []);
+	return !!isMobile;
+}
 function fmt(sec) {
 	if (!Number.isFinite(sec) || sec < 0) sec = 0;
 	return `${Math.floor(sec / 60)}:${Math.floor(sec % 60).toString().padStart(2, "0")}`;
@@ -1274,6 +1740,8 @@ function LetMeThink() {
 	});
 	const [settingsOpen, setSettingsOpen] = (0, import_react.useState)(false);
 	const settingsRef = (0, import_react.useRef)(null);
+	const [showGlobe, setShowGlobe] = (0, import_react.useState)(false);
+	const isMobile = useIsMobile();
 	(0, import_react.useEffect)(() => {
 		try {
 			localStorage.setItem("lmt-use24h", String(use24h));
@@ -1342,8 +1810,16 @@ function LetMeThink() {
 		amb.region,
 		amb.country
 	].filter(Boolean).join(", ");
+	useKeyboardShortcuts({
+		onTogglePlay: handleToggle,
+		onNext: player.next,
+		onPrev: player.prev,
+		onToggleGlobe: () => setShowGlobe((v) => !v),
+		onCloseGlobe: () => setShowGlobe(false),
+		onToggleSettings: () => setSettingsOpen((o) => !o)
+	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
-		className: "relative min-h-screen w-full overflow-hidden bg-black",
+		className: "relative min-h-screen w-full overflow-x-hidden bg-black",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 				src: lofi_desk_default,
@@ -1364,59 +1840,62 @@ function LetMeThink() {
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { id: "lmt-yt-player" })
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "fixed bottom-3 left-3 z-50 rounded-md bg-black/70 px-2 py-1 text-[10px] text-white/70 backdrop-blur-sm",
+				className: "relative z-10 flex items-center justify-between gap-2 px-3 pt-4 sm:gap-4 sm:px-8 sm:pt-7",
 				children: [
-					"YT: ",
-					player.ready ? player.playing ? "▶ Playing" : "⏸ Ready" : "⏳ Loading",
-					player.title ? ` • ${player.title}` : ""
-				]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "relative z-10 flex items-start justify-between gap-4 px-5 pt-5 sm:px-8 sm:pt-7",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "text-legible flex items-center gap-2.5 text-white/90",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WeatherIcon, {
-						sky: amb.sky,
-						isNight: amb.isNight
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "leading-tight",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "text-xl font-light tabular-nums sm:text-2xl",
-							children: amb.temp !== null ? `${amb.temp}°` : "--°"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "text-[11px] font-light tracking-wide text-white/70",
-							children: amb.loading ? "locating…" : amb.city || "—"
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "text-legible flex shrink-0 items-center gap-1.5 text-white/90 sm:gap-2.5",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WeatherIcon, {
+							sky: amb.sky,
+							isNight: amb.isNight
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "leading-tight",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "text-base font-light tabular-nums sm:text-2xl",
+								children: amb.temp !== null ? `${amb.temp}°` : "--°"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "text-[9px] font-light tracking-wide text-white/70 sm:text-[11px]",
+								children: amb.loading ? "locating…" : amb.city || "—"
+							})]
 						})]
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-					href: `https://www.youtube.com/playlist?list=${PLAYLIST_ID}`,
-					target: "_blank",
-					rel: "noopener noreferrer",
-					"aria-label": "Open the playlist on YouTube Music",
-					className: "shrink-0 flex items-center gap-2 rounded-full px-3 py-2 text-white/90 transition hover:text-white",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
-							viewBox: "0 0 24 24",
-							fill: "currentColor",
-							className: "h-4 w-4",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M8 5v14l11-7z" })
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-sm font-medium",
-							children: "YT Music"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
-							viewBox: "0 0 24 24",
-							fill: "none",
-							stroke: "currentColor",
-							strokeWidth: "2",
-							strokeLinecap: "round",
-							strokeLinejoin: "round",
-							className: "h-3.5 w-3.5 text-white/50",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M7 17L17 7" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M7 7h10v10" })]
-						})
-					]
-				})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						onClick: () => setShowGlobe((v) => !v),
+						className: "glass flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-white/80 transition hover:text-white sm:gap-2 sm:px-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "pulse-dot inline-block h-2 w-2 shrink-0 rounded-full bg-[oklch(0.72_0.19_145)]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "whitespace-nowrap text-[11px] font-medium tracking-wide sm:text-xs",
+							children: [listeners.length, " minds in flow"]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+						href: `https://www.youtube.com/playlist?list=${PLAYLIST_ID}`,
+						target: "_blank",
+						rel: "noopener noreferrer",
+						"aria-label": "Open the playlist on YouTube Music",
+						className: "shrink-0 flex items-center gap-1 rounded-full px-2 py-1.5 text-white/90 transition hover:text-white sm:gap-2 sm:px-3 sm:py-2",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+								viewBox: "0 0 24 24",
+								fill: "currentColor",
+								className: "h-3.5 w-3.5 sm:h-4 sm:w-4",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M8 5v14l11-7z" })
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[11px] font-medium sm:text-sm",
+								children: "YT Music"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+								viewBox: "0 0 24 24",
+								fill: "none",
+								stroke: "currentColor",
+								strokeWidth: "2",
+								strokeLinecap: "round",
+								strokeLinejoin: "round",
+								className: "hidden h-3 w-3 text-white/50 sm:block",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M7 17L17 7" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M7 7h10v10" })]
+							})
+						]
+					})
+				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "text-legible relative z-10 mt-[16vh] px-6 text-center sm:mt-[20vh]",
@@ -1451,8 +1930,27 @@ function LetMeThink() {
 					}, quote.text)
 				]
 			}),
+			showGlobe && (0, import_react_dom.createPortal)(/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "globe-section-enter fixed inset-0 z-50 flex flex-col items-center justify-center overflow-visible bg-black/80 backdrop-blur-sm",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "text-legible mb-2 text-center text-xs font-light tracking-wider text-white/50 sm:mb-4 sm:text-sm",
+						children: "People are listening from around the world"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WorldGlobe, { userLocation: {
+						lat: amb.lat,
+						lng: amb.lng,
+						city: amb.city
+					} }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						onClick: () => setShowGlobe(false),
+						className: "mt-3 rounded-full px-4 py-1.5 text-xs font-light text-white/50 transition hover:text-white sm:mt-4 sm:text-sm",
+						children: "Close"
+					})
+				]
+			}), document.body),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "text-legible absolute bottom-5 left-5 z-10 flex items-center gap-1.5 text-[11px] font-light tracking-wide text-white/75 sm:bottom-7 sm:left-8 sm:text-xs",
+				className: "text-legible absolute bottom-5 left-5 z-10 flex items-center gap-1.5 text-[10px] font-light tracking-wide text-white/75 sm:bottom-7 sm:left-8 sm:text-xs",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MapPin, { className: "h-3.5 w-3.5" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 					className: "max-w-[55vw] truncate",
 					children: amb.loading ? "locating…" : place || "—"
@@ -1531,32 +2029,86 @@ function LetMeThink() {
 									children: "LinkedIn"
 								})]
 							})]
-						})
+						}),
+						!isMobile && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "my-3 h-px bg-white/10" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "mb-3 text-xs font-medium uppercase tracking-widest text-white/50",
+								children: "Keyboard shortcuts"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-1.5 text-xs text-white/70",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Play / Pause" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("kbd", {
+											className: "kbd",
+											children: "Space"
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Next track" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("kbd", {
+											className: "kbd",
+											children: "→"
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Previous track" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("kbd", {
+											className: "kbd",
+											children: "←"
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Toggle globe" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("kbd", {
+											className: "kbd",
+											children: "G"
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Close globe" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("kbd", {
+											className: "kbd",
+											children: "Esc"
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Settings" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("kbd", {
+											className: "kbd",
+											children: "S"
+										})]
+									})
+								]
+							})
+						] })
 					]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-14 sm:pb-10",
+				className: "absolute inset-x-0 bottom-0 z-10 flex justify-center px-3 pb-20 sm:px-4 sm:pb-16",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "glass flex w-full max-w-xl items-center gap-4 rounded-full py-3 pl-3 pr-4 sm:py-3.5 sm:pl-3.5 sm:pr-6",
+					className: "glass flex w-full max-w-xl items-center gap-2.5 rounded-full py-2.5 pl-2.5 pr-3 sm:items-center sm:gap-4 sm:py-3.5 sm:pl-3.5 sm:pr-6",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: `relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-1 ring-white/25 sm:h-16 sm:w-16 ${player.playing ? "spin-slow" : ""}`,
+							className: `relative h-10 w-10 shrink-0 overflow-hidden rounded-full ring-1 ring-white/25 sm:h-16 sm:w-16 ${player.playing ? "spin-slow" : ""}`,
 							children: [thumb ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 								src: thumb,
 								alt: "",
 								className: "h-full w-full scale-[1.35] object-cover"
-							}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-full w-full bg-white/15" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 m-auto h-2.5 w-2.5 rounded-full bg-black/60" })]
+							}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-full w-full bg-white/15" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 m-auto h-2 w-2 rounded-full bg-black/60 sm:h-2.5 sm:w-2.5" })]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "min-w-0 flex-1",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "truncate text-sm font-medium text-white sm:text-base",
+									className: "truncate text-xs font-medium text-white sm:text-base",
 									children: player.title || (player.ready ? "Loading track…" : "Let Me Think")
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "mt-0.5 truncate text-xs font-light text-white/65",
+									className: "mt-0.5 truncate text-[10px] font-light text-white/65 sm:text-xs",
 									children: player.author || "lofi beats for building things quietly"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
@@ -1575,10 +2127,10 @@ function LetMeThink() {
 									onMouseUp: (e) => player.commitSeek(Number(e.currentTarget.value)),
 									onTouchEnd: (e) => player.commitSeek(Number(e.currentTarget.value)),
 									onKeyUp: (e) => player.commitSeek(Number(e.currentTarget.value)),
-									className: "seek-range mt-2 w-full"
+									className: "seek-range mt-1.5 w-full sm:mt-2"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "mt-1 text-[11px] font-light tabular-nums text-white/60",
+									className: "mt-0.5 text-[9px] font-light tabular-nums text-white/60 sm:text-[11px]",
 									children: [
 										fmt(player.current),
 										" / ",
@@ -1588,26 +2140,26 @@ function LetMeThink() {
 							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex shrink-0 items-center gap-2 sm:gap-3",
+							className: "flex shrink-0 items-center gap-1 sm:gap-3",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 									onClick: player.prev,
 									"aria-label": "Previous track",
-									className: "rounded-full p-1.5 text-white/70 transition hover:text-white",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SkipBack, { className: "h-4 w-4" })
+									className: "rounded-full p-1 text-white/70 transition hover:text-white sm:p-1.5",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SkipBack, { className: "h-3.5 w-3.5 sm:h-4 sm:w-4" })
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 									onClick: handleToggle,
 									disabled: !player.ready,
 									"aria-label": player.playing ? "Pause" : "Play",
-									className: "rounded-full bg-white/90 p-3 text-neutral-900 transition hover:bg-white disabled:opacity-50",
-									children: player.playing ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Pause, { className: "h-4 w-4" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Play, { className: "h-4 w-4" })
+									className: "rounded-full bg-white/90 p-2 text-neutral-900 transition hover:bg-white disabled:opacity-50 sm:p-3",
+									children: player.playing ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Pause, { className: "h-3.5 w-3.5 sm:h-4 sm:w-4" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Play, { className: "h-3.5 w-3.5 sm:h-4 sm:w-4" })
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 									onClick: player.next,
 									"aria-label": "Next track",
-									className: "rounded-full p-1.5 text-white/70 transition hover:text-white",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SkipForward, { className: "h-4 w-4" })
+									className: "rounded-full p-1 text-white/70 transition hover:text-white sm:p-1.5",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SkipForward, { className: "h-3.5 w-3.5 sm:h-4 sm:w-4" })
 								})
 							]
 						})
