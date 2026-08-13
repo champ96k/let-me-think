@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { listeners } from "@/lib/listeners";
+import type { Listener } from "@/lib/listeners";
 
 const EARTH_IMG =
   "//cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg";
@@ -7,7 +7,13 @@ const EARTH_IMG =
 const ringColor = (t: number) =>
   `rgba(115, 230, 160, ${(1 - t) * 0.55})`;
 
-export function WorldGlobe({ userLocation }: { userLocation?: { lat: number; lng: number; city?: string } }) {
+export function WorldGlobe({
+  activeListeners,
+  userLocation,
+}: {
+  activeListeners: Listener[];
+  userLocation?: { lat: number; lng: number; city?: string };
+}) {
   const [Globe, setGlobe] = useState<any | null>(null);
   const [dimensions, setDimensions] = useState({ width: 700, height: 700 });
   const [error, setError] = useState<string | null>(null);
@@ -79,7 +85,7 @@ export function WorldGlobe({ userLocation }: { userLocation?: { lat: number; lng
 
   const allPoints = userLocation?.lat
     ? [
-        ...listeners,
+        ...activeListeners,
         {
           city: userLocation.city || "You",
           country: "",
@@ -88,7 +94,7 @@ export function WorldGlobe({ userLocation }: { userLocation?: { lat: number; lng
           isUser: true,
         },
       ]
-    : listeners;
+    : activeListeners;
 
   return (
     <div className="overflow-visible" style={{ width: dimensions.width, height: dimensions.height }}>
@@ -110,7 +116,7 @@ export function WorldGlobe({ userLocation }: { userLocation?: { lat: number; lng
             ? `<div class="globe-tooltip globe-tooltip--you">📍 You are here</div>`
             : `<div class="globe-tooltip">${d.city}, ${d.country}</div>`
         }
-        ringsData={listeners}
+        ringsData={activeListeners}
         ringLat="lat"
         ringLng="lng"
         ringColor={ringColor}

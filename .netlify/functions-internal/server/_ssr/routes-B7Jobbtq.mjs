@@ -6,7 +6,7 @@ import { a as Play, c as MapPin, d as CloudMoon, i as Settings, l as Cloud, n as
 import { n as SwitchThumb, t as Switch$1 } from "../_libs/@radix-ui/react-switch+[...].mjs";
 import { t as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CzzYbWNg.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-B7Jobbtq.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var import_react_dom = /* @__PURE__ */ __toESM(require_react_dom());
@@ -959,7 +959,7 @@ function greeting(hour) {
 	return "Good evening.";
 }
 var PLAYLIST_ID = "PLubzk6WJ4BESzbg0AuzpHaCfSVgmepEIh";
-var STORAGE_KEY = "lmt-playback";
+var STORAGE_KEY$1 = "lmt-playback";
 var PLAYLIST_VERSION_KEY = "lmt-playlist-id";
 function waitForApi(timeoutMs = 1e4) {
 	return new Promise((resolve, reject) => {
@@ -993,12 +993,12 @@ function waitForApi(timeoutMs = 1e4) {
 }
 function savePlaybackState(state) {
 	try {
-		localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+		localStorage.setItem(STORAGE_KEY$1, JSON.stringify(state));
 	} catch {}
 }
 function loadPlaybackState() {
 	try {
-		const raw = localStorage.getItem(STORAGE_KEY);
+		const raw = localStorage.getItem(STORAGE_KEY$1);
 		if (!raw) return null;
 		return JSON.parse(raw);
 	} catch {
@@ -1021,7 +1021,7 @@ function useYouTubePlayer(containerId) {
 	(0, import_react.useEffect)(() => {
 		try {
 			if (localStorage.getItem(PLAYLIST_VERSION_KEY) !== "PLubzk6WJ4BESzbg0AuzpHaCfSVgmepEIh") {
-				localStorage.removeItem(STORAGE_KEY);
+				localStorage.removeItem(STORAGE_KEY$1);
 				localStorage.setItem(PLAYLIST_VERSION_KEY, PLAYLIST_ID);
 			}
 		} catch {}
@@ -1213,311 +1213,9 @@ var Switch = import_react.forwardRef(({ className, ...props }, ref) => /* @__PUR
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SwitchThumb, { className: cn("pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0") })
 }));
 Switch.displayName = Switch$1.displayName;
-var listeners = [
-	{
-		city: "Bangalore",
-		country: "India",
-		lat: 12.9716,
-		lng: 77.5946
-	},
-	{
-		city: "Mumbai",
-		country: "India",
-		lat: 19.076,
-		lng: 72.8777
-	},
-	{
-		city: "Delhi",
-		country: "India",
-		lat: 28.7041,
-		lng: 77.1025
-	},
-	{
-		city: "Pune",
-		country: "India",
-		lat: 18.5204,
-		lng: 73.8567
-	},
-	{
-		city: "Hyderabad",
-		country: "India",
-		lat: 17.385,
-		lng: 78.4867
-	},
-	{
-		city: "Chennai",
-		country: "India",
-		lat: 13.0827,
-		lng: 80.2707
-	},
-	{
-		city: "Kolkata",
-		country: "India",
-		lat: 22.5726,
-		lng: 88.3639
-	},
-	{
-		city: "Ahmedabad",
-		country: "India",
-		lat: 23.0225,
-		lng: 72.5714
-	},
-	{
-		city: "Jaipur",
-		country: "India",
-		lat: 26.9124,
-		lng: 75.7873
-	},
-	{
-		city: "Nashik",
-		country: "India",
-		lat: 19.9975,
-		lng: 73.7898
-	},
-	{
-		city: "New York",
-		country: "USA",
-		lat: 40.7128,
-		lng: -74.006
-	},
-	{
-		city: "Los Angeles",
-		country: "USA",
-		lat: 34.0522,
-		lng: -118.2437
-	},
-	{
-		city: "San Francisco",
-		country: "USA",
-		lat: 37.7749,
-		lng: -122.4194
-	},
-	{
-		city: "Chicago",
-		country: "USA",
-		lat: 41.8781,
-		lng: -87.6298
-	},
-	{
-		city: "Toronto",
-		country: "Canada",
-		lat: 43.6532,
-		lng: -79.3832
-	},
-	{
-		city: "Vancouver",
-		country: "Canada",
-		lat: 49.2827,
-		lng: -123.1207
-	},
-	{
-		city: "Mexico City",
-		country: "Mexico",
-		lat: 19.4326,
-		lng: -99.1332
-	},
-	{
-		city: "São Paulo",
-		country: "Brazil",
-		lat: -23.5505,
-		lng: -46.6333
-	},
-	{
-		city: "Buenos Aires",
-		country: "Argentina",
-		lat: -34.6037,
-		lng: -58.3816
-	},
-	{
-		city: "Bogotá",
-		country: "Colombia",
-		lat: 4.711,
-		lng: -74.0721
-	},
-	{
-		city: "London",
-		country: "UK",
-		lat: 51.5074,
-		lng: -.1278
-	},
-	{
-		city: "Paris",
-		country: "France",
-		lat: 48.8566,
-		lng: 2.3522
-	},
-	{
-		city: "Berlin",
-		country: "Germany",
-		lat: 52.52,
-		lng: 13.405
-	},
-	{
-		city: "Amsterdam",
-		country: "Netherlands",
-		lat: 52.3676,
-		lng: 4.9041
-	},
-	{
-		city: "Madrid",
-		country: "Spain",
-		lat: 40.4168,
-		lng: -3.7038
-	},
-	{
-		city: "Lisbon",
-		country: "Portugal",
-		lat: 38.7223,
-		lng: -9.1393
-	},
-	{
-		city: "Rome",
-		country: "Italy",
-		lat: 41.9028,
-		lng: 12.4964
-	},
-	{
-		city: "Vienna",
-		country: "Austria",
-		lat: 48.2082,
-		lng: 16.3738
-	},
-	{
-		city: "Prague",
-		country: "Czech Republic",
-		lat: 50.0755,
-		lng: 14.4378
-	},
-	{
-		city: "Warsaw",
-		country: "Poland",
-		lat: 52.2297,
-		lng: 21.0122
-	},
-	{
-		city: "Stockholm",
-		country: "Sweden",
-		lat: 59.3293,
-		lng: 18.0686
-	},
-	{
-		city: "Moscow",
-		country: "Russia",
-		lat: 55.7558,
-		lng: 37.6173
-	},
-	{
-		city: "Istanbul",
-		country: "Turkey",
-		lat: 41.0082,
-		lng: 28.9784
-	},
-	{
-		city: "Dubai",
-		country: "UAE",
-		lat: 25.2048,
-		lng: 55.2708
-	},
-	{
-		city: "Cairo",
-		country: "Egypt",
-		lat: 30.0444,
-		lng: 31.2357
-	},
-	{
-		city: "Nairobi",
-		country: "Kenya",
-		lat: -1.2921,
-		lng: 36.8219
-	},
-	{
-		city: "Lagos",
-		country: "Nigeria",
-		lat: 6.5244,
-		lng: 3.3792
-	},
-	{
-		city: "Cape Town",
-		country: "South Africa",
-		lat: -33.9249,
-		lng: 18.4241
-	},
-	{
-		city: "Singapore",
-		country: "Singapore",
-		lat: 1.3521,
-		lng: 103.8198
-	},
-	{
-		city: "Bangkok",
-		country: "Thailand",
-		lat: 13.7563,
-		lng: 100.5018
-	},
-	{
-		city: "Kuala Lumpur",
-		country: "Malaysia",
-		lat: 3.139,
-		lng: 101.6869
-	},
-	{
-		city: "Jakarta",
-		country: "Indonesia",
-		lat: -6.2088,
-		lng: 106.8456
-	},
-	{
-		city: "Ho Chi Minh City",
-		country: "Vietnam",
-		lat: 10.8231,
-		lng: 106.6297
-	},
-	{
-		city: "Tokyo",
-		country: "Japan",
-		lat: 35.6762,
-		lng: 139.6503
-	},
-	{
-		city: "Seoul",
-		country: "South Korea",
-		lat: 37.5665,
-		lng: 126.978
-	},
-	{
-		city: "Beijing",
-		country: "China",
-		lat: 39.9042,
-		lng: 116.4074
-	},
-	{
-		city: "Taipei",
-		country: "Taiwan",
-		lat: 25.033,
-		lng: 121.5654
-	},
-	{
-		city: "Sydney",
-		country: "Australia",
-		lat: -33.8688,
-		lng: 151.2093
-	},
-	{
-		city: "Melbourne",
-		country: "Australia",
-		lat: -37.8136,
-		lng: 144.9631
-	},
-	{
-		city: "Auckland",
-		country: "New Zealand",
-		lat: -36.8485,
-		lng: 174.7633
-	}
-];
 var EARTH_IMG = "//cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg";
 var ringColor = (t) => `rgba(115, 230, 160, ${(1 - t) * .55})`;
-function WorldGlobe({ userLocation }) {
+function WorldGlobe({ activeListeners, userLocation }) {
 	const [Globe, setGlobe] = (0, import_react.useState)(null);
 	const [dimensions, setDimensions] = (0, import_react.useState)({
 		width: 700,
@@ -1587,13 +1285,13 @@ function WorldGlobe({ userLocation }) {
 			children: "Loading globe…"
 		})
 	});
-	const allPoints = userLocation?.lat ? [...listeners, {
+	const allPoints = userLocation?.lat ? [...activeListeners, {
 		city: userLocation.city || "You",
 		country: "",
 		lat: userLocation.lat,
 		lng: userLocation.lng,
 		isUser: true
-	}] : listeners;
+	}] : activeListeners;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "overflow-visible",
 		style: {
@@ -1614,7 +1312,7 @@ function WorldGlobe({ userLocation }) {
 			pointRadius: (d) => d.isUser ? .9 : .6,
 			pointColor: (d) => d.isUser ? "#22d3ee" : "#73e6a0",
 			pointLabel: (d) => d.isUser ? `<div class="globe-tooltip globe-tooltip--you">📍 You are here</div>` : `<div class="globe-tooltip">${d.city}, ${d.country}</div>`,
-			ringsData: listeners,
+			ringsData: activeListeners,
 			ringLat: "lat",
 			ringLng: "lng",
 			ringColor,
@@ -1624,6 +1322,457 @@ function WorldGlobe({ userLocation }) {
 			ringsTransitionDuration: 0
 		})
 	});
+}
+var listeners = [
+	{
+		city: "Bangalore",
+		country: "India",
+		lat: 12.9716,
+		lng: 77.5946
+	},
+	{
+		city: "Mumbai",
+		country: "India",
+		lat: 19.076,
+		lng: 72.8777
+	},
+	{
+		city: "Delhi",
+		country: "India",
+		lat: 28.7041,
+		lng: 77.1025
+	},
+	{
+		city: "Pune",
+		country: "India",
+		lat: 18.5204,
+		lng: 73.8567
+	},
+	{
+		city: "Hyderabad",
+		country: "India",
+		lat: 17.385,
+		lng: 78.4867
+	},
+	{
+		city: "Chennai",
+		country: "India",
+		lat: 13.0827,
+		lng: 80.2707
+	},
+	{
+		city: "Kolkata",
+		country: "India",
+		lat: 22.5726,
+		lng: 88.3639
+	},
+	{
+		city: "Ahmedabad",
+		country: "India",
+		lat: 23.0225,
+		lng: 72.5714
+	},
+	{
+		city: "Jaipur",
+		country: "India",
+		lat: 26.9124,
+		lng: 75.7873
+	},
+	{
+		city: "Nashik",
+		country: "India",
+		lat: 19.9975,
+		lng: 73.7898
+	},
+	{
+		city: "New York",
+		country: "USA",
+		lat: 40.7128,
+		lng: -74.006
+	},
+	{
+		city: "San Francisco",
+		country: "USA",
+		lat: 37.7749,
+		lng: -122.4194
+	},
+	{
+		city: "Chicago",
+		country: "USA",
+		lat: 41.8781,
+		lng: -87.6298
+	},
+	{
+		city: "Denver",
+		country: "USA",
+		lat: 39.7392,
+		lng: -104.9903
+	},
+	{
+		city: "Seattle",
+		country: "USA",
+		lat: 47.6062,
+		lng: -122.3321
+	},
+	{
+		city: "Austin",
+		country: "USA",
+		lat: 30.2672,
+		lng: -97.7431
+	},
+	{
+		city: "Toronto",
+		country: "Canada",
+		lat: 43.6532,
+		lng: -79.3832
+	},
+	{
+		city: "Vancouver",
+		country: "Canada",
+		lat: 49.2827,
+		lng: -123.1207
+	},
+	{
+		city: "Mexico City",
+		country: "Mexico",
+		lat: 19.4326,
+		lng: -99.1332
+	},
+	{
+		city: "São Paulo",
+		country: "Brazil",
+		lat: -23.5505,
+		lng: -46.6333
+	},
+	{
+		city: "Buenos Aires",
+		country: "Argentina",
+		lat: -34.6037,
+		lng: -58.3816
+	},
+	{
+		city: "Bogotá",
+		country: "Colombia",
+		lat: 4.711,
+		lng: -74.0721
+	},
+	{
+		city: "Medellín",
+		country: "Colombia",
+		lat: 6.2476,
+		lng: -75.5658
+	},
+	{
+		city: "London",
+		country: "UK",
+		lat: 51.5074,
+		lng: -.1278
+	},
+	{
+		city: "Paris",
+		country: "France",
+		lat: 48.8566,
+		lng: 2.3522
+	},
+	{
+		city: "Berlin",
+		country: "Germany",
+		lat: 52.52,
+		lng: 13.405
+	},
+	{
+		city: "Amsterdam",
+		country: "Netherlands",
+		lat: 52.3676,
+		lng: 4.9041
+	},
+	{
+		city: "Madrid",
+		country: "Spain",
+		lat: 40.4168,
+		lng: -3.7038
+	},
+	{
+		city: "Lisbon",
+		country: "Portugal",
+		lat: 38.7223,
+		lng: -9.1393
+	},
+	{
+		city: "Rome",
+		country: "Italy",
+		lat: 41.9028,
+		lng: 12.4964
+	},
+	{
+		city: "Vienna",
+		country: "Austria",
+		lat: 48.2082,
+		lng: 16.3738
+	},
+	{
+		city: "Prague",
+		country: "Czech Republic",
+		lat: 50.0755,
+		lng: 14.4378
+	},
+	{
+		city: "Warsaw",
+		country: "Poland",
+		lat: 52.2297,
+		lng: 21.0122
+	},
+	{
+		city: "Stockholm",
+		country: "Sweden",
+		lat: 59.3293,
+		lng: 18.0686
+	},
+	{
+		city: "Helsinki",
+		country: "Finland",
+		lat: 60.1699,
+		lng: 24.9384
+	},
+	{
+		city: "Dublin",
+		country: "Ireland",
+		lat: 53.3498,
+		lng: -6.2603
+	},
+	{
+		city: "Copenhagen",
+		country: "Denmark",
+		lat: 55.6761,
+		lng: 12.5683
+	},
+	{
+		city: "Zurich",
+		country: "Switzerland",
+		lat: 47.3769,
+		lng: 8.5417
+	},
+	{
+		city: "Barcelona",
+		country: "Spain",
+		lat: 41.3874,
+		lng: 2.1686
+	},
+	{
+		city: "Dubai",
+		country: "UAE",
+		lat: 25.2048,
+		lng: 55.2708
+	},
+	{
+		city: "Tel Aviv",
+		country: "Israel",
+		lat: 32.0853,
+		lng: 34.7818
+	},
+	{
+		city: "Istanbul",
+		country: "Turkey",
+		lat: 41.0082,
+		lng: 28.9784
+	},
+	{
+		city: "Cairo",
+		country: "Egypt",
+		lat: 30.0444,
+		lng: 31.2357
+	},
+	{
+		city: "Nairobi",
+		country: "Kenya",
+		lat: -1.2921,
+		lng: 36.8219
+	},
+	{
+		city: "Lagos",
+		country: "Nigeria",
+		lat: 6.5244,
+		lng: 3.3792
+	},
+	{
+		city: "Cape Town",
+		country: "South Africa",
+		lat: -33.9249,
+		lng: 18.4241
+	},
+	{
+		city: "Singapore",
+		country: "Singapore",
+		lat: 1.3521,
+		lng: 103.8198
+	},
+	{
+		city: "Bangkok",
+		country: "Thailand",
+		lat: 13.7563,
+		lng: 100.5018
+	},
+	{
+		city: "Kuala Lumpur",
+		country: "Malaysia",
+		lat: 3.139,
+		lng: 101.6869
+	},
+	{
+		city: "Jakarta",
+		country: "Indonesia",
+		lat: -6.2088,
+		lng: 106.8456
+	},
+	{
+		city: "Ho Chi Minh City",
+		country: "Vietnam",
+		lat: 10.8231,
+		lng: 106.6297
+	},
+	{
+		city: "Tokyo",
+		country: "Japan",
+		lat: 35.6762,
+		lng: 139.6503
+	},
+	{
+		city: "Osaka",
+		country: "Japan",
+		lat: 34.6937,
+		lng: 135.5023
+	},
+	{
+		city: "Seoul",
+		country: "South Korea",
+		lat: 37.5665,
+		lng: 126.978
+	},
+	{
+		city: "Shenzhen",
+		country: "China",
+		lat: 22.5431,
+		lng: 114.0579
+	},
+	{
+		city: "Taipei",
+		country: "Taiwan",
+		lat: 25.033,
+		lng: 121.5654
+	},
+	{
+		city: "Sydney",
+		country: "Australia",
+		lat: -33.8688,
+		lng: 151.2093
+	},
+	{
+		city: "Melbourne",
+		country: "Australia",
+		lat: -37.8136,
+		lng: 144.9631
+	},
+	{
+		city: "Auckland",
+		country: "New Zealand",
+		lat: -36.8485,
+		lng: 174.7633
+	},
+	{
+		city: "Moscow",
+		country: "Russia",
+		lat: 55.7558,
+		lng: 37.6173
+	}
+];
+function getLocalHour(lng) {
+	const utcOffset = Math.round(lng / 15);
+	return ((/* @__PURE__ */ new Date()).getUTCHours() + utcOffset + 24) % 24;
+}
+function isAwake(lng) {
+	const h = getLocalHour(lng);
+	return h >= 7 && h <= 23;
+}
+function shuffle(arr) {
+	const a = [...arr];
+	for (let i = a.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		const tmp = a[i];
+		a[i] = a[j];
+		a[j] = tmp;
+	}
+	return a;
+}
+var MIN_COUNT = 12;
+var MAX_COUNT = 35;
+var STORAGE_KEY = "lmt-listener-count";
+var STORAGE_TS_KEY = "lmt-listener-ts";
+var BASE_COUNT = 20;
+function loadPersisted() {
+	try {
+		const raw = localStorage.getItem(STORAGE_KEY);
+		const tsRaw = localStorage.getItem(STORAGE_TS_KEY);
+		if (raw && tsRaw) {
+			const saved = parseInt(raw, 10);
+			const savedTs = parseInt(tsRaw, 10);
+			if (!isNaN(saved) && !isNaN(savedTs)) {
+				const elapsed = Date.now() - savedTs;
+				const steps = Math.floor(elapsed / 6e4);
+				let count = saved;
+				for (let i = 0; i < Math.min(steps, 20); i++) count = Math.max(MIN_COUNT, Math.min(MAX_COUNT, count + (Math.random() > .45 ? 1 : -1)));
+				const awake = listeners.filter((l) => isAwake(l.lng));
+				return Math.max(MIN_COUNT, Math.min(MAX_COUNT, Math.min(awake.length, count)));
+			}
+		}
+	} catch {}
+	return BASE_COUNT;
+}
+function persistCount(n) {
+	try {
+		localStorage.setItem(STORAGE_KEY, String(n));
+		localStorage.setItem(STORAGE_TS_KEY, String(Date.now()));
+	} catch {}
+}
+function useActiveListeners() {
+	const [count, setCount] = (0, import_react.useState)(() => loadPersisted());
+	const [activeListeners, setActiveListeners] = (0, import_react.useState)([]);
+	const countRef = (0, import_react.useRef)(count);
+	countRef.current = count;
+	const recompute = (0, import_react.useCallback)(() => {
+		const awake = listeners.filter((l) => isAwake(l.lng));
+		const n = Math.max(MIN_COUNT, Math.min(MAX_COUNT, Math.min(awake.length, countRef.current)));
+		const picked = shuffle(awake).slice(0, n);
+		setActiveListeners(picked);
+	}, []);
+	(0, import_react.useEffect)(() => {
+		recompute();
+		const id = window.setInterval(recompute, 3e5);
+		return () => window.clearInterval(id);
+	}, [recompute]);
+	(0, import_react.useEffect)(() => {
+		let timer;
+		const tick = () => {
+			const pool = listeners.filter((l) => isAwake(l.lng)).length;
+			setCount((prev) => {
+				let next = prev + (Math.random() > .45 ? 1 : -1);
+				next = Math.max(MIN_COUNT, Math.min(MAX_COUNT, Math.min(pool, next)));
+				persistCount(next);
+				return next;
+			});
+			const delay = (Math.floor(Math.random() * 45) + 45) * 1e3;
+			timer = setTimeout(tick, delay);
+		};
+		const firstDelay = (Math.floor(Math.random() * 30) + 30) * 1e3;
+		timer = setTimeout(tick, firstDelay);
+		return () => clearTimeout(timer);
+	}, []);
+	(0, import_react.useEffect)(() => {
+		recompute();
+	}, [count, recompute]);
+	return {
+		activeListeners,
+		count
+	};
 }
 function isTyping(target) {
 	const el = target;
@@ -1742,6 +1891,7 @@ function LetMeThink() {
 	const settingsRef = (0, import_react.useRef)(null);
 	const [showGlobe, setShowGlobe] = (0, import_react.useState)(false);
 	const isMobile = useIsMobile();
+	const { activeListeners, count } = useActiveListeners();
 	(0, import_react.useEffect)(() => {
 		try {
 			localStorage.setItem("lmt-use24h", String(use24h));
@@ -1863,7 +2013,7 @@ function LetMeThink() {
 						className: "glass flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-white/80 transition hover:text-white sm:gap-2 sm:px-3",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "pulse-dot inline-block h-2 w-2 shrink-0 rounded-full bg-[oklch(0.72_0.19_145)]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 							className: "whitespace-nowrap text-[11px] font-medium tracking-wide sm:text-xs",
-							children: [listeners.length, " minds in flow"]
+							children: [count, " minds in flow"]
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
@@ -1937,15 +2087,21 @@ function LetMeThink() {
 						className: "text-legible mb-2 text-center text-xs font-light tracking-wider text-white/50 sm:mb-4 sm:text-sm",
 						children: "People are listening from around the world"
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WorldGlobe, { userLocation: {
-						lat: amb.lat,
-						lng: amb.lng,
-						city: amb.city
-					} }),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WorldGlobe, {
+						activeListeners,
+						userLocation: {
+							lat: amb.lat,
+							lng: amb.lng,
+							city: amb.city
+						}
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 						onClick: () => setShowGlobe(false),
-						className: "mt-3 rounded-full px-4 py-1.5 text-xs font-light text-white/50 transition hover:text-white sm:mt-4 sm:text-sm",
-						children: "Close"
+						className: "mt-3 flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-light text-white/50 transition hover:text-white sm:mt-4 sm:text-sm",
+						children: ["Close", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("kbd", {
+							className: "kbd",
+							children: "Esc"
+						})]
 					})
 				]
 			}), document.body),

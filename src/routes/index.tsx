@@ -23,7 +23,7 @@ import { greeting, randomQuote, type Quote } from "@/lib/quotes";
 import { PLAYLIST_ID, useYouTubePlayer } from "@/lib/useYouTubePlayer";
 import { Switch } from "@/components/ui/switch";
 import { WorldGlobe } from "@/components/WorldGlobe";
-import { listeners } from "@/lib/listeners";
+import { useActiveListeners } from "@/lib/useActiveListeners";
 import { useKeyboardShortcuts } from "@/lib/useKeyboardShortcuts";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -123,6 +123,7 @@ function LetMeThink() {
   const settingsRef = useRef<HTMLDivElement>(null);
   const [showGlobe, setShowGlobe] = useState(false);
   const isMobile = useIsMobile();
+  const { activeListeners, count } = useActiveListeners();
 
   // Persist settings to localStorage
   useEffect(() => {
@@ -252,7 +253,7 @@ function LetMeThink() {
         >
           <span className="pulse-dot inline-block h-2 w-2 shrink-0 rounded-full bg-[oklch(0.72_0.19_145)]" />
           <span className="whitespace-nowrap text-[11px] font-medium tracking-wide sm:text-xs">
-            {listeners.length} minds in flow
+            {count} minds in flow
           </span>
         </button>
 
@@ -321,7 +322,7 @@ function LetMeThink() {
             <div className="text-legible mb-2 text-center text-xs font-light tracking-wider text-white/50 sm:mb-4 sm:text-sm">
               People are listening from around the world
             </div>
-            <WorldGlobe userLocation={{ lat: amb.lat, lng: amb.lng, city: amb.city }} />
+            <WorldGlobe activeListeners={activeListeners} userLocation={{ lat: amb.lat, lng: amb.lng, city: amb.city }} />
             <button
               onClick={() => setShowGlobe(false)}
               className="mt-3 flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-light text-white/50 transition hover:text-white sm:mt-4 sm:text-sm"
